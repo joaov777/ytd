@@ -36,4 +36,7 @@ pip install -r requirements.txt
 1. Time format must be inserted into the script following the logic described `HH:MM:SS` (Hour, Minute, Second). For example:
 - 01:20:10 - At exactly 1 hour, 20 minutes and 10 seconds.
 - 00:01:30 - At exactly 1 minute and 30 seconds.
+- 00:00:15 - At exactly 15 seconds.
+
+
 
