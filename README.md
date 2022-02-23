@@ -30,7 +30,7 @@ python -m pip install --upgrade pip
 pip install pytube moviepy ffmpeg youtube-dl
 ```
 
-## - How to use this script?
+## How to use this script?
 1. Time format must be inserted into the script following the logic described `HH:MM:SS` (Hour, Minute, Second). For example:
 - 01:20:10 - At exactly 1 hour, 20 minutes and 10 seconds.
 - 00:01:30 - At exactly 1 minute and 30 seconds.
