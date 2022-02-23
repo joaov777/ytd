@@ -39,9 +39,9 @@ pip install -r requirements.txt
 ## How to use this script?
 
 - The following valid Youtuve URL's are accepted:
-  - sdf
-  - adsf
-  - asdf
+  - https://www.youtube.com/watch?v=<span style="color:blue">[random_url]</span>
+  - youtube.com/<random_url>
+  - <random_url>
 
 - Time format must be inserted into the script following the logic described `HH:MM:SS` (Hour, Minute, Second). For example:
 01:20:10 - At exactly 1 hour, 20 minutes and 10 seconds.
