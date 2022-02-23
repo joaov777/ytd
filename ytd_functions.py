@@ -25,7 +25,7 @@ def clear_screen():
 
 
 def check_timestamps(start_time, end_time):
-    """Check whether timestamps make sense for the pattern HH:MM:SS"""
+    """- Check whether timestamps make sense for the pattern HH:MM:SS"""
     pass
 
 def check_url(url):
