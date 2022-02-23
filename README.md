@@ -12,7 +12,7 @@ Script extensively tested on `python 3.10.2` and on `pip 22.0.3`.
 *Creating a Python virtual environment for the execution of this project is optional but highly advisable since its changes and requirements will not have any effect on your local machine current settings.*
 - Creating a virtual environment
 
-```
+```python
 python -m venv <name_of_your_environment>
 # for unix systems
 source <name_of_your_environment>/bin/activate
