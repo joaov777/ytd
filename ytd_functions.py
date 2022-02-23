@@ -32,12 +32,6 @@ def check_url(url):
     """Check Youtube url parameter"""
     pass
 
-def progress_bar(s, c, b):
-    """Creates a simple progress bar for loading"""
-    #for i in tqdm(range(b), desc='YTD Progress'):
-    #    i = i + 1
-    tqdm(range(c, b))
-
 # downloading the video from youtube
 def download_video(video_url, final_video_name):
 
