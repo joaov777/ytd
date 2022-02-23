@@ -2,7 +2,11 @@
 from pytube import YouTube
 from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
 from os import system, name
-import time
+import time as t
+from tqdm import tqdm, trange
+import threading
+from pytube.cli import on_progress
+
 
 standard_header=">> YOUTUBE VIDEO DOWNLOADER <<"
 
@@ -18,6 +22,8 @@ def reloader(header, screen_clear="False"):
 def clear_screen():
     system("cls") if name == "nt" else system("clear")
 
+
+
 def check_timestamps(start_time, end_time):
     """Check whether timestamps make sense for the pattern HH:MM:SS"""
     pass
@@ -26,13 +32,18 @@ def check_url(url):
     """Check Youtube url parameter"""
     pass
 
+def progress_bar(s, c, b):
+    """Creates a simple progress bar for loading"""
+    #for i in tqdm(range(b), desc='YTD Progress'):
+    #    i = i + 1
+    tqdm(range(c, b))
+
 # downloading the video from youtube
 def download_video(video_url, final_video_name):
 
     print("- Downloading your video...")
     
-    yt = YouTube(video_url)
-
+    yt = YouTube(video_url, on_progress_callback=on_progress)
     video = yt.streams.get_highest_resolution()
     video.download(filename=f"{final_video_name}.mp4")
 
@@ -45,7 +56,7 @@ def cut_video(video_local_path, start_time, end_time, final_file):
 # downloading and cutting 
 def download_and_cut_video(video_url, video_name_after_cut, start_time, end_time):
     
-    download_video(video_url,"temp_video") 
+    download_video(video_url,"temp_video")
     cut_video(r"./temp_video.mp4", start_time, end_time, video_name_after_cut)
  
 #converting time to seconds
