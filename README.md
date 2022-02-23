@@ -38,21 +38,17 @@ pip install -r requirements.txt
 
 ## How to use this script?
 
-- The following valid Youtuve URL's are accepted:
-  - https://www.youtube.com/watch?v=<span style="color:blue">*[random_url]*</span>
-  - youtube.com/<random_url>
-  - <random_url>
+- The following valid Youtuve URL's are accepted: 
+  - ht<area>tps://w<area>ww.youtube.com/watch?v={random_url}
+  - ht<area>tp://ww<area>w.youtube.com/watch?v={random_url}
+  - w<area>ww.youtube.com/watch?v={random_url}
+  - youtube.com/watch?v={random_url}
+  - {random_url}
 
-```diff
-- text in red
-+ text in green
-! text in orange
-# text in gray
-@@ text in purple (and bold)@@
-```
+- Time format follows the logic `HH:MM:SS` (Hour, Minute, Second). For example:
+  - 01:20:10 - At exactly 1 hour, 20 minutes and 10 seconds.
+  - 00:01:30 - At exactly 1 minute and 30 seconds.
+  - 00:00:15 - At exactly 15 seconds.
 
-- Time format must be inserted into the script following the logic described `HH:MM:SS` (Hour, Minute, Second). For example:
-01:20:10 - At exactly 1 hour, 20 minutes and 10 seconds.
-00:01:30 - At exactly 1 minute and 30 seconds.
-00:00:15 - At exactly 15 seconds.
-
+## Tips
+- Some videos might take longer than others due to its length as well as your to your bandwidth
