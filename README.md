@@ -39,6 +39,7 @@ pip install -r requirements.txt
 ## How to use this script?
 
 - Only provide FULL Youtube valid URL's, for example:
+
 https://youtube.com/<rest_of_url_here>
 
 - Time format must be inserted into the script following the logic described `HH:MM:SS` (Hour, Minute, Second). For example:
