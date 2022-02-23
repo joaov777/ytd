@@ -39,7 +39,7 @@ pip install -r requirements.txt
 ## How to use this script?
 
 - The following valid Youtuve URL's are accepted:
-  - https://www.youtube.com/watch?v=<span style="color:blue">[random_url]</span>
+  - https://www.youtube.com/watch?v=<span style="color:blue">*[random_url]*</span>
   - youtube.com/<random_url>
   - <random_url>
 
