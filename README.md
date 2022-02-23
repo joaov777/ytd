@@ -9,12 +9,6 @@ Python script for dowloading Youtube videos at the highest video and audio quali
 
 ## Requirements
 Script extensively tested on `python 3.10.2` and on `pip 22.0.3`. 
-1. Install the requirements
-```
-pip install -r requirements.txt
-```
-2. Setting up the environment (optional) 
-
 *Creating a Python virtual environment for the execution of this project is optional but highly advisable since its changes and requirements will not have any effect on your local machine current settings.*
 - Creating a virtual environment
 
@@ -26,9 +20,14 @@ source <name_of_your_environment>/bin/activate
 source <name_of_your_environment>/Scripts/activate
 
 python -m pip install --upgrade pip
-
-pip install pytube moviepy ffmpeg youtube-dl
 ```
+
+Install the requirements
+```
+pip install -r requirements.txt
+```
+
+
 
 ## How to use this script?
 1. Time format must be inserted into the script following the logic described `HH:MM:SS` (Hour, Minute, Second). For example:
