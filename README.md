@@ -8,11 +8,13 @@ Python script for dowloading Youtube videos at the highest video and audio quali
 - Both download and cut part of a Youtube video at once.
 
 ## Requirements
-- python 3.10.2
-- pip 22.0.3
-
-### - Setting up the environment 
-Creating a Python virtual environment for the execution of this project is optional but highly advisable since its changes and requirements will not have any effect on your local machine current settings.
+Script extensively tested on `python 3.10.2` and on `pip 22.0.3`. 
+1. Install the requirements
+```
+pip install -r requirements.txt
+```
+2. Setting up the environment (optional) 
+*Creating a Python virtual environment for the execution of this project is optional but highly advisable since its changes and requirements will not have any effect on your local machine current settings.*
 - Creating a virtual environment
 
 ```
@@ -26,11 +28,9 @@ python -m pip install --upgrade pip
 
 pip install pytube moviepy ffmpeg youtube-dl
 ```
-### - Restrictions applied
-Time format must be inserted into the script following the logic described `HH:MM:SS` (Hour, Minute, Second). For example:
+
+## - How to use this script?
+1. Time format must be inserted into the script following the logic described `HH:MM:SS` (Hour, Minute, Second). For example:
 - 01:20:10 - At exactly 1 hour, 20 minutes and 10 seconds.
 - 00:01:30 - At exactly 1 minute and 30 seconds.
-
-
-
 
