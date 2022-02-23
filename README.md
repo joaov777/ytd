@@ -30,7 +30,7 @@ source <name_of_your_environment>/Scripts/activate
 python -m pip install --upgrade pip
 ```
 
-Install the requirements
+- Install the requirements
 
 ```python
 pip install -r requirements.txt
