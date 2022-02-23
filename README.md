@@ -14,6 +14,7 @@ Script extensively tested on `python 3.10.2` and on `pip 22.0.3`.
 pip install -r requirements.txt
 ```
 2. Setting up the environment (optional) 
+
 *Creating a Python virtual environment for the execution of this project is optional but highly advisable since its changes and requirements will not have any effect on your local machine current settings.*
 - Creating a virtual environment
 
