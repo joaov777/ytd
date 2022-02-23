@@ -13,21 +13,24 @@ Script extensively tested on `python 3.10.2` and on `pip 22.0.3`.
 - Creating a virtual environment
 
 ```python
+
+#creating the virtual environment
 python -m venv <name_of_your_environment>
-# for unix systems
+
+#activating the virtual environment
+# - for unix systems
 source <name_of_your_environment>/bin/activate
-# for windows systems
+# - for windows systems
 source <name_of_your_environment>/Scripts/activate
 
+#upgrading pip
 python -m pip install --upgrade pip
 ```
 
 Install the requirements
-```
+```python
 pip install -r requirements.txt
 ```
-
-
 
 ## How to use this script?
 1. Time format must be inserted into the script following the logic described `HH:MM:SS` (Hour, Minute, Second). For example:
