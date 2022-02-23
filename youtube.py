@@ -1,6 +1,5 @@
 #/usr/bin/env python
 
-
 #importing functions
 import ytd_functions as ytdf
 from datetime import datetime
