@@ -11,7 +11,7 @@ def main():
     #main menu
     while True:
         
-        ytdf.reloader(ytdf.standard_header)
+        ytdf.reloader(ytdf.standard_header, True)
         print("(1) - Download Youtube video")
         print("(2) - Cut Video")
         print("(3) - Download and cut video")
@@ -55,6 +55,8 @@ def main():
 
                     ytdf.download_and_cut_video(url, file_name, start, end)
 
+                    break
+
             case("q"):
                 print("Exiting now...")
                 t.sleep(1)
@@ -63,7 +65,7 @@ def main():
                 print("Insert a valid option...") ; t.sleep(1)
 
         if user_option.lower() == "q":
-            break;
+            break
 
 if __name__ == "__main__":
    main()
