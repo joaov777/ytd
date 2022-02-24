@@ -11,8 +11,8 @@ def main():
     #main menu
     while True:
         
-        ytdf.reloader(ytdf.standard_header, True)
-        print("(1) - Download Youtube video")
+        ytdf.header(ytdf.standard_header, True)
+        print("(1) - Download Youtube video/audio")
         print("(2) - Cut Video")
         print("(3) - Download and cut video")
         user_option = input("Option: ")
@@ -22,8 +22,8 @@ def main():
 
                 while True:
                     
-                    ytdf.reloader(ytdf.standard_header, True)
-                    ytdf.reloader("> Download Youtube Video")
+                    ytdf.header(ytdf.standard_header, True)
+                    ytdf.header("> Download Youtube Video")
                 
                     url = input("- Video URL: ")
                     file_name = input(" - File output name: ")
@@ -37,26 +37,26 @@ def main():
 
             case "2":
 
-                ytdf.reloader(ytdf.standard_header, True)
-                ytdf.reloader("> Cut video")
+                ytdf.header(ytdf.standard_header, True)
+                ytdf.header("> Cut video")
                 print("Option 2 logic here...") ; input()
 
             case "3":
 
                 while True:
 
-                    ytdf.reloader(ytdf.standard_header, True)
-                    ytdf.reloader("> Download and Cut Youtube video")
+                    ytdf.header(ytdf.standard_header, True)
+                    ytdf.header("> Download and Cut Youtube video")
                     
                     url = input("- Video URL: ")
                     file_name = input("- File output name: ")
                     start = input("- Start point: ")
                     end = input("- End point: ")
 
-                    ytdf.download_and_cut_video(url, file_name, start, end)
-
+                    if ytdf.check_timestamps(start, end) and ytdf.check_url(url):
+                        ytdf.download_and_cut_video(url, file_name, start, end)
                     break
-
+        
             case("q"):
                 print("Exiting now...")
                 t.sleep(1)
