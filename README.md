@@ -10,7 +10,7 @@
 
 ## How does it work?
 
-When you run the script `youtube.py`, it saves the final file (depending on your menu choice) **on the current valid path from where the script was executed**. The videos are saved in an "*.mp4*" container whereas audio files are saved as "*.mp3*". Future updates will provide options for more customization. If the full video (or a section of it) is downloaded, the highest video and audio quality available are automatically chosen.
+When you run the script `ytd.py`, it saves the final file (depending on your menu choice) **on the current valid path from where the script was executed**. The videos are saved in an "*.mp4*" container whereas audio files are saved as "*.mp3*". Future updates will provide options for more customization. If the full video (or a section of it) is downloaded, the highest video and audio quality available are automatically chosen.
 
 The logic of the procedures within this project makes sure the intended target (valid Youtube URL) seamlessly generates a valid final file downloaded locally on your machine so that only then operations can be done on it. This way, reinforcing the full separation between the download routine from any further necessary processing in order to generate the final file. 
 
