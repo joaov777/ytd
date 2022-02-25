@@ -1,8 +1,4 @@
 # REQUIRED LIBRARIES
-from asyncio.log import logger
-from importlib.resources import path
-from tkinter.ttk import Progressbar
-from tracemalloc import start
 from pytube import YouTube
 from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
 from moviepy.editor import *
@@ -92,9 +88,13 @@ def download_video(video_url, final_video_name):
 def cut_video(video_local_path, start_time, end_time, final_file):
 
     print("- Cutting your video...")
-    #ffmpeg_extract_subclip(r"{}".format(video_local_path), time_to_sec(start_time), time_to_sec(end_time), targetname=f"{final_file}.mp4")
-    clip = VideoFileClip(video_local_path).subclip(start_time,end_time)
-    final = concatenate_videoclips([clip]).write_videofile(f"./{final_file}.mp4", verbose=False, logger=None)
+    ffmpeg_extract_subclip(video_local_path, time_to_sec(start_time), time_to_sec(end_time), targetname=f"{final_file}.mp4")
+
+    #clip = VideoFileClip(video_local_path).subclip(start_time,end_time)
+    #final = concatenate_videoclips([clip]).write_videofile(f"./{final_file}.mp4", verbose=False, logger=None)
+    #clip.write_videofile(f"./{final_file}" + ".mp4", verbose=False, logger=None)
+    #clip.close()
+
 
 # downloading and cutting 
 def download_and_cut_video(video_url, video_name_after_cut, start_time, end_time):
@@ -102,7 +102,7 @@ def download_and_cut_video(video_url, video_name_after_cut, start_time, end_time
     download_video(video_url,"temp_video")
     cut_video(f"./temp_video.mp4", start_time, end_time, video_name_after_cut)
 
-    #os.remove("./temp_video.mp4") if os.path.exists("./temp_video.mp4") else print("- File not found! ")
+    os.remove(f"./temp_video.mp4") if os.path.exists("./temp_video.mp4") else print("- File not found! ")
 
     print(f"> Location: {os.getcwd()}")
     input()
