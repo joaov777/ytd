@@ -1,11 +1,14 @@
 # REQUIRED LIBRARIES
-from pytube import YouTube, Playlist, Channel
+from asyncio.log import logger
+from importlib.resources import path
+from tkinter.ttk import Progressbar
+from tracemalloc import start
+from pytube import YouTube
 from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
+from moviepy.editor import *
 from os import system, name
 import os
 import time as t
-from tqdm import tqdm, trange
-import threading
 from pytube.cli import on_progress
 import pytube.cli as ptc
 import re
@@ -25,16 +28,19 @@ def clear_screen():
 # checking video timestamps both for pattern and inconsistency
 def check_timestamps(start_time, end_time):
     """- Check whether timestamps make sense for the pattern HH:MM:SS"""
+
     #return True if time_to_sec(start_time) <= time_to_sec(end_time) else False
     if time_to_sec(start_time) < time_to_sec(end_time):
+        print("> Timestamps valid!")
+        t.sleep(1)
         return True
     else:
         print("> Start time is lower/equal to End Time!")
-        input()
+        t.sleep(1)
         return False
 
 # checking whether a Youtube URL is valid
-def check_url(video_url):
+def check_url(video_url_or_file_name):
     """Validate Youtube URL parameter locally and remotely"""
 
     #checks if the youtube url is semmantically correct
@@ -48,12 +54,12 @@ def check_url(video_url):
     #-- https://youtu.be/ADNlX5O_j0E
     #-- http://youtu.be/ADNlX5O_j0E
     #-- youtube.com/watch?v=ADNlX5O_j0E
-    #-- #youtu.be/ADNlX5O_j0E
+    #-- youtu.be/ADNlX5O_j0E
     match_url = re.compile(r'^(https?\:\/\/)?((www\.)?youtube\.com|youtu\.be)\/(watch\?v=)?.+$', re.IGNORECASE)
 
-    if re.match(match_url, video_url) is not None:
+    if re.match(match_url, video_url_or_file_name) is not None:
         try: 
-            yt = YouTube(video_url).thumbnail_url
+            yt = YouTube(video_url_or_file_name)
             print(f"> Valid Youtube URL!")
             t.sleep(1)
             return True
@@ -63,7 +69,9 @@ def check_url(video_url):
             return False
 
     else:
-        print(f"> Invalid Youtube URL - [{video_url}]") 
+        print("> Invalid Youtube URL!")
+        t.sleep(1)
+        return True
     
 # downloading the video from youtube
 def download_video(video_url, final_video_name):
@@ -85,17 +93,18 @@ def cut_video(video_local_path, start_time, end_time, final_file):
 
     print("- Cutting your video...")
     #ffmpeg_extract_subclip(r"{}".format(video_local_path), time_to_sec(start_time), time_to_sec(end_time), targetname=f"{final_file}.mp4")
-    ffmpeg_extract_subclip(r"{}".format(video_local_path), time_to_sec(start_time), time_to_sec(end_time), targetname=f"{final_file}.mp4")
+    clip = VideoFileClip(video_local_path).subclip(start_time,end_time)
+    final = concatenate_videoclips([clip]).write_videofile(f"./{final_file}.mp4", verbose=False, logger=None)
 
 # downloading and cutting 
 def download_and_cut_video(video_url, video_name_after_cut, start_time, end_time):
     
     download_video(video_url,"temp_video")
-    cut_video(r"./temp_video.mp4", start_time, end_time, video_name_after_cut)
+    cut_video(f"./temp_video.mp4", start_time, end_time, video_name_after_cut)
 
-    os.remove("./temp_video.mp4") if os.path.exists("./temp_video.mp4") else print("- File not found! ")
+    #os.remove("./temp_video.mp4") if os.path.exists("./temp_video.mp4") else print("- File not found! ")
 
-    print(f"> Location: {os.getcwd()}/{video_name_after_cut}")
+    print(f"> Location: {os.getcwd()}")
     input()
  
 #converting time to seconds

@@ -26,14 +26,11 @@ def main():
                     ytdf.header("> Download Youtube Video")
                 
                     url = input("- Video URL: ")
-                    file_name = input(" - File output name: ")
+                    file_name = input("- File output name: ")
 
-                    if url == "" or file_name == "":
-                        print("- Provide the info required!") ; input()
-                    else:
-                        print("- Success! Video downloaded!") if ytdf.download_video(url,file_name) else print("- Error! Video not downloaded!")
-                        input()
-                        break
+                    if ytdf.check_url(url):
+                        ytdf.download_video(url, file_name)
+                    break
 
             case "2":
 
