@@ -8,6 +8,7 @@ from tqdm import tqdm, trange
 import threading
 from pytube.cli import on_progress
 import pytube.cli as ptc
+import re
 
 standard_header=">> YOUTUBE VIDEO DOWNLOADER <<"
 
@@ -35,7 +36,21 @@ def check_timestamps(start_time, end_time):
 # checking whether a Youtube URL is valid
 def check_url(video_url):
     """Check Youtube url parameter"""
-    return True
+    match_url = re.compile(r'^(https?\:\/\/)?((www\.)?youtube\.com|youtu\.be)\/(watch\?v=)?.+$', re.IGNORECASE)
+
+    if re.match(match_url, video_url) is not None:
+        try: 
+            yt = YouTube(video_url).thumbnail_url
+            print(f"> Valid Youtube URL!")
+            t.sleep(1)
+            return True
+        except:
+            print("> Invalid Youtube video!")
+            t.sleep(1)
+            return False
+
+    else:
+        print(f"> Invalid Youtube URL - [{video_url}]") 
     
 # downloading the video from youtube
 def download_video(video_url, final_video_name):
@@ -50,11 +65,13 @@ def download_video(video_url, final_video_name):
 
     video = yt.streams.get_highest_resolution()
     video.download(filename=f"{final_video_name}.mp4")
+   
     
 # cutting the video by section
 def cut_video(video_local_path, start_time, end_time, final_file):
 
     print("- Cutting your video...")
+    #ffmpeg_extract_subclip(r"{}".format(video_local_path), time_to_sec(start_time), time_to_sec(end_time), targetname=f"{final_file}.mp4")
     ffmpeg_extract_subclip(r"{}".format(video_local_path), time_to_sec(start_time), time_to_sec(end_time), targetname=f"{final_file}.mp4")
 
 # downloading and cutting 
@@ -64,6 +81,9 @@ def download_and_cut_video(video_url, video_name_after_cut, start_time, end_time
     cut_video(r"./temp_video.mp4", start_time, end_time, video_name_after_cut)
 
     os.remove("./temp_video.mp4") if os.path.exists("./temp_video.mp4") else print("- File not found! ")
+
+    print(f"> Location: {os.getcwd()}/{video_name_after_cut}")
+    input()
  
 #converting time to seconds
 def time_to_sec(t):
