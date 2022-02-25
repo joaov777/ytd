@@ -35,7 +35,20 @@ def check_timestamps(start_time, end_time):
 
 # checking whether a Youtube URL is valid
 def check_url(video_url):
-    """Check Youtube url parameter"""
+    """Validate Youtube URL parameter locally and remotely"""
+
+    #checks if the youtube url is semmantically correct
+    #accepts all options below: 
+    #-- www.youtube.com/watch?v=ADNlX5O_j0E
+    #-- www.youtube.com/watch?v=ADNlX5O_j0E
+    #-- https://www.youtube.com/watch?v=ADNlX5O_j0E
+    #-- https://youtube.com/watch?v=ADNlX5O_j0E
+    #-- http://www.youtube.com/watch?v=ADNlX5O_j0E
+    #-- http://youtube.com/watch?v=ADNlX5O_j0E
+    #-- https://youtu.be/ADNlX5O_j0E
+    #-- http://youtu.be/ADNlX5O_j0E
+    #-- youtube.com/watch?v=ADNlX5O_j0E
+    #-- #youtu.be/ADNlX5O_j0E
     match_url = re.compile(r'^(https?\:\/\/)?((www\.)?youtube\.com|youtu\.be)\/(watch\?v=)?.+$', re.IGNORECASE)
 
     if re.match(match_url, video_url) is not None:
