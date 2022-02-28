@@ -82,7 +82,6 @@ def download_video(video_url, final_video_name):
     video = yt.streams.get_highest_resolution()
     video.download(filename=f"{final_video_name}.mp4")
    
-    
 # cutting the video by section
 def cut_video(video_local_path, start_time, end_time, final_file):
 
