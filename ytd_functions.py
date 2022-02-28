@@ -8,6 +8,8 @@ import time as t
 from pytube.cli import on_progress
 import pytube.cli as ptc
 import re
+import imageio_ffmpeg
+import subprocess as sp
 
 standard_header=">> YOUTUBE VIDEO DOWNLOADER <<"
 
@@ -77,24 +79,17 @@ def download_video(video_url, final_video_name):
     header(standard_header, True)
     print(f"> Downloading: {yt.title}")
 
-    # if no output name is provided by the user
-    #if final_video_name == "": final_video_name = str(yt.title)[0]
-
     video = yt.streams.get_highest_resolution()
     video.download(filename=f"{final_video_name}.mp4")
    
-    
 # cutting the video by section
 def cut_video(video_local_path, start_time, end_time, final_file):
 
     print("- Cutting your video...")
-    ffmpeg_extract_subclip(video_local_path, time_to_sec(start_time), time_to_sec(end_time), targetname=f"{final_file}.mp4")
+    #ffmpeg_extract_subclip(video_local_path, time_to_sec(start_time), time_to_sec(end_time), targetname=f"{final_file}.mp4")
 
-    #clip = VideoFileClip(video_local_path).subclip(start_time,end_time)
-    #final = concatenate_videoclips([clip]).write_videofile(f"./{final_file}.mp4", verbose=False, logger=None)
-    #clip.write_videofile(f"./{final_file}" + ".mp4", verbose=False, logger=None)
-    #clip.close()
-
+    ffmpeg_path = imageio_ffmpeg.get_ffmpeg_exe()
+    sp.call([ffmpeg_path, '-loglevel', 'quiet', '-ss', start_time, '-to', end_time, '-i', video_local_path, '-c', 'copy', f"{final_file}.mp4"])
 
 # downloading and cutting 
 def download_and_cut_video(video_url, video_name_after_cut, start_time, end_time):
