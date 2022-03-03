@@ -50,7 +50,7 @@ def main():
                     start = input("- Start point: ")
                     end = input("- End point: ")
 
-                    if ytdf.check_timestamps(start, end) and ytdf.check_url(url):
+                    if ytdf.check_timestamps(url, start, end) and ytdf.check_url(url):
                         ytdf.download_and_cut_video(url, file_name, start, end)
                     break
         

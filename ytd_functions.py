@@ -7,7 +7,6 @@ import re
 import imageio_ffmpeg
 import subprocess as sp
 
-
 standard_header=">> YOUTUBE VIDEO DOWNLOADER <<"
 
 #for headers and better UI
@@ -21,18 +20,29 @@ def clear_screen():
     os.system("cls") if os.name == "nt" else os.system("clear")
 
 # checking video timestamps both for pattern and inconsistency
-def check_timestamps(start_time, end_time):
+def check_timestamps(video_url, start_time, end_time):
     """- Check whether timestamps make sense for the pattern HH:MM:SS"""
 
-    #return True if time_to_sec(start_time) <= time_to_sec(end_time) else False
-    if time_to_sec(start_time) < time_to_sec(end_time):
-        print("> Timestamps valid!")
-        t.sleep(1)
-        return True
+    yt = YouTube(video_url, on_progress_callback=on_progress)
+
+    #regex to validate HH:MM:SS format
+    match_timestamp = re.compile(r'^[0-9][0-9]{1}\:[0-9][0-9]\:[0-9][0-9]$' , re.IGNORECASE)
+
+    #verifying whether start_time and end_time follow the format
+    if re.match(match_timestamp, start_time) and re.match(match_timestamp, end_time):
+        if time_to_sec(start_time) < time_to_sec(end_time) and time_to_sec(start_time) >= time_to_sec("00:00:00") and time_to_sec(end_time) <= yt.length:
+            print("> Timestamps valid!")
+            t.sleep(1)
+            return True
+        else:
+            print("> Timestamps invalid!")
+            input("> Press any key to continue...")
+            return False
     else:
-        print("> Start time is lower/equal to End Time!")
-        t.sleep(1)
+        print("> Timestamps misformatted! Insert HH:MM:SS (Hours, Minutes, Seconds)")
+        input("> Press any key to continue...")
         return False
+
 
 # checking whether a Youtube URL is valid
 def check_url(video_url_or_file_name):
