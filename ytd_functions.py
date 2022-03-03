@@ -1,15 +1,12 @@
 # REQUIRED LIBRARIES
 from pytube import YouTube
-from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
-from moviepy.editor import *
-from os import system, name
 import os
 import time as t
 from pytube.cli import on_progress
-import pytube.cli as ptc
 import re
 import imageio_ffmpeg
 import subprocess as sp
+
 
 standard_header=">> YOUTUBE VIDEO DOWNLOADER <<"
 
@@ -21,7 +18,7 @@ def header(header, screen_clear="False"):
 
 # clearing the screen 
 def clear_screen():
-    system("cls") if name == "nt" else os.system("clear")
+    os.system("cls") if os.name == "nt" else os.system("clear")
 
 # checking video timestamps both for pattern and inconsistency
 def check_timestamps(start_time, end_time):
