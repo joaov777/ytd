@@ -1,4 +1,4 @@
-# ytd-cli
+# ytd
 
 **Python script for downloading <u>[Youtube®](https://youtube.com)</u> videos at the highest video and audio quality.** 
 
