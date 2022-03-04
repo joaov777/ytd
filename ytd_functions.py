@@ -7,7 +7,12 @@ import re
 import imageio_ffmpeg
 import subprocess as sp
 
-standard_header=">> YOUTUBE VIDEO DOWNLOADER <<"
+standard_header="### -- YOUTUBE VIDEO DOWNLOADER -- ###"
+
+#defining colors
+CBLUE = "\33[34m"
+CEND = "\33[0m"
+CRED = "\33[31m"
 
 #for headers and better UI
 def header(header, screen_clear="False"):
@@ -15,6 +20,10 @@ def header(header, screen_clear="False"):
     if screen_clear == True: clear_screen()
     print(f"{header}")
 
+# check whether a parameter is void or not - Return True is Not void
+def check_void_parameter(param):
+    if param != "" : return True
+  
 # clearing the screen 
 def clear_screen():
     os.system("cls") if os.name == "nt" else os.system("clear")
@@ -31,21 +40,20 @@ def check_timestamps(video_url, start_time, end_time):
     #verifying whether start_time and end_time follow the format
     if re.match(match_timestamp, start_time) and re.match(match_timestamp, end_time):
         if time_to_sec(start_time) < time_to_sec(end_time) and time_to_sec(start_time) >= time_to_sec("00:00:00") and time_to_sec(end_time) <= yt.length:
-            print("> Timestamps valid!")
+            print(CBLUE + "> Timestamps valid!" + CEND)
             t.sleep(1)
             return True
         else:
-            print("> Timestamps invalid!")
+            print(CRED + "> Timestamps invalid!" + CEND)
             input("> Press any key to continue...")
             return False
     else:
-        print("> Timestamps misformatted! Insert HH:MM:SS (Hours, Minutes, Seconds)")
+        print(CRED + "> Timestamps misformatted! Insert HH:MM:SS (Hours, Minutes, Seconds)" + CEND)
         input("> Press any key to continue...")
         return False
 
-
 # checking whether a Youtube URL is valid
-def check_url(video_url_or_file_name):
+def check_url(url):
     """Validate Youtube URL parameter locally and remotely"""
 
     #checks if the youtube url is semmantically correct
@@ -62,21 +70,15 @@ def check_url(video_url_or_file_name):
     #-- youtu.be/ADNlX5O_j0E
     match_url = re.compile(r'^(https?\:\/\/)?((www\.)?youtube\.com|youtu\.be)\/(watch\?v=)?.+$', re.IGNORECASE)
 
-    if re.match(match_url, video_url_or_file_name) is not None:
+    if re.match(match_url, url) is not None:
         try: 
-            yt = YouTube(video_url_or_file_name)
-            print(f"> Valid Youtube URL!")
-            t.sleep(1)
+            yt = YouTube(url)
             return True
         except:
-            print("> Invalid Youtube video!")
-            t.sleep(1)
             return False
 
     else:
-        print("> Invalid Youtube URL!")
-        t.sleep(1)
-        return True
+        return False
     
 # downloading the video from youtube
 def download_video(video_url, final_video_name):
@@ -84,19 +86,18 @@ def download_video(video_url, final_video_name):
     yt = YouTube(video_url, on_progress_callback=on_progress)
 
     header(standard_header, True)
-    print(f"> Downloading: {yt.title}")
+    print(CBLUE + f"> Downloading: {yt.title}" + CEND)
 
     video = yt.streams.get_highest_resolution()
     video.download(filename=f"{final_video_name}.mp4")
    
 # cutting the video by section
-def cut_video(video_local_path, start_time, end_time, final_file):
+def cut_video(video_local_url, start_time, end_time, final_file):
 
     print("- Cutting your video...")
-    #ffmpeg_extract_subclip(video_local_path, time_to_sec(start_time), time_to_sec(end_time), targetname=f"{final_file}.mp4")
-
-    ffmpeg_path = imageio_ffmpeg.get_ffmpeg_exe()
-    sp.call([ffmpeg_path, '-loglevel', 'quiet', '-ss', start_time, '-to', end_time, '-i', video_local_path, '-c', 'copy', f"{final_file}.mp4"])
+    
+    ffmpeg_url = imageio_ffmpeg.get_ffmpeg_exe()
+    sp.call([ffmpeg_url, '-loglevel', 'quiet', '-ss', start_time, '-to', end_time, '-i', video_local_url, '-c', 'copy', f"{final_file}.mp4"])
 
 # downloading and cutting 
 def download_and_cut_video(video_url, video_name_after_cut, start_time, end_time):

@@ -1,9 +1,11 @@
 #/usr/bin/env python
 
 #importing functions
+from turtle import clear
 import ytd_functions as ytdf
 from datetime import datetime
 import time as t
+from pytube import YouTube
 
 #main thread
 def main():
@@ -11,10 +13,20 @@ def main():
     #main menu
     while True:
         
+        while True:
+            ytdf.header(ytdf.standard_header, True)
+            url = input(" - Insert URL or file path: ")
+            if ytdf.check_url(url): break
+            else: print(ytdf.CRED + "> Invalid parameter!" + ytdf.CEND) ; t.sleep(1)
+            ytdf.clear_screen()
+
+        yt = YouTube(url)
+
         ytdf.header(ytdf.standard_header, True)
-        print("(1) - Download Youtube video/audio")
-        print("(2) - Cut Video")
-        print("(3) - Download and cut video")
+        ytdf.header(ytdf.CBLUE + f"> Target - {yt.title}" + ytdf.CEND)
+        print("(1) - Download Full Video")
+        print("(2) - Download and Trim Video")
+        print("(q) - Quit")
         user_option = input("Option: ")
 
         match user_option:
@@ -23,45 +35,38 @@ def main():
                 while True:
                     
                     ytdf.header(ytdf.standard_header, True)
-                    ytdf.header("> Download Youtube Video")
-                
-                    url = input("- Video URL: ")
+                    ytdf.header(ytdf.CBLUE + f"> Target - {yt.title}" + ytdf.CEND)
+                    ytdf.header("> Download Full Video")
+                    
                     file_name = input("- File output name: ")
-
-                    if ytdf.check_url(url):
-                        ytdf.download_video(url, file_name)
-                    break
+                    if ytdf.check_void_parameter(file_name) : break
+                
+                ytdf.download_video(url, file_name)
 
             case "2":
-
-                ytdf.header(ytdf.standard_header, True)
-                ytdf.header("> Cut video")
-                print("Option 2 logic here...") ; input()
-
-            case "3":
 
                 while True:
 
                     ytdf.header(ytdf.standard_header, True)
-                    ytdf.header("> Download and Cut Youtube video")
+                    ytdf.header(ytdf.CBLUE + f"> Target - {yt.title}" + ytdf.CEND)
+                    ytdf.header("> Download and Trim video")
                     
-                    url = input("- Video URL: ")
                     file_name = input("- File output name: ")
                     start = input("- Start point: ")
                     end = input("- End point: ")
 
-                    if ytdf.check_timestamps(url, start, end) and ytdf.check_url(url):
+                    if ytdf.check_timestamps(url, start, end):
                         ytdf.download_and_cut_video(url, file_name, start, end)
                     break
         
-            case("q"):
+            case ("q"|"quit"):
                 print("Exiting now...")
                 t.sleep(1)
 
             case _: 
                 print("Insert a valid option...") ; t.sleep(1)
 
-        if user_option.lower() == "q":
+        if user_option.lower() == "q" or user_option.lower() == "quit":
             break
 
 if __name__ == "__main__":
