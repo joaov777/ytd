@@ -19,10 +19,6 @@ def header(header, screen_clear="False"):
     
     if screen_clear == True: clear_screen()
     print(f"{header}")
-
-# check whether a parameter is void or not - Return True is Not void
-def check_void_parameter(param):
-    if param != "" : return True
   
 # clearing the screen 
 def clear_screen():

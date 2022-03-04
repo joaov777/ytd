@@ -10,12 +10,15 @@ from pytube import YouTube
 #main thread
 def main():
 
+    file_name = ""
+
     #main menu
     while True:
         
         while True:
             ytdf.header(ytdf.standard_header, True)
-            url = input(" - Insert URL or file path: ")
+            #url = input(" - Insert Youtube video URL: ")
+            url = "https://www.youtube.com/watch?v=sD-jrTliVfE"
             if ytdf.check_url(url): break
             else: print(ytdf.CRED + "> Invalid parameter!" + ytdf.CEND) ; t.sleep(1)
             ytdf.clear_screen()
@@ -39,7 +42,9 @@ def main():
                     ytdf.header("> Download Full Video")
                     
                     file_name = input("- File output name: ")
-                    if ytdf.check_void_parameter(file_name) : break
+                    if file_name == "" : file_name = yt.title
+
+                    break
                 
                 ytdf.download_video(url, file_name)
 
@@ -52,8 +57,10 @@ def main():
                     ytdf.header("> Download and Trim video")
                     
                     file_name = input("- File output name: ")
-                    start = input("- Start point: ")
-                    end = input("- End point: ")
+                    if file_name == "" : file_name = yt.title
+
+                    start = input("- Start point (HH:MM:SS): ")
+                    end = input("- End point (HH:MM:SS): ")
 
                     if ytdf.check_timestamps(url, start, end):
                         ytdf.download_and_cut_video(url, file_name, start, end)
