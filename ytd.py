@@ -17,8 +17,7 @@ def main():
         
         while True:
             ytdf.header(ytdf.standard_header, True)
-            #url = input(" - Insert Youtube video URL: ")
-            url = "https://www.youtube.com/watch?v=sD-jrTliVfE"
+            url = input(" - Insert Youtube video URL: ")
             if ytdf.check_url(url): break
             else: print(ytdf.CRED + "> Invalid parameter!" + ytdf.CEND) ; t.sleep(1)
             ytdf.clear_screen()
