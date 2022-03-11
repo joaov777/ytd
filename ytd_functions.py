@@ -1,4 +1,5 @@
 # REQUIRED LIBRARIES
+from fileinput import filename
 from pytube import YouTube
 import os
 import time as t
@@ -7,6 +8,7 @@ import re
 import imageio_ffmpeg
 import subprocess as sp
 
+ffmpeg_url = imageio_ffmpeg.get_ffmpeg_exe()
 standard_header="### -- YOUTUBE VIDEO DOWNLOADER -- ###"
 
 #defining colors
@@ -23,6 +25,14 @@ def header(header, screen_clear="False"):
 # clearing the screen 
 def clear_screen():
     os.system("cls") if os.name == "nt" else os.system("clear")
+
+# remove unused files
+def cleaner(file_name):
+    if os.path.exists(file_name) : 
+        os.remove(file_name)
+        return True
+    else: 
+        return False
 
 # checking video timestamps both for pattern and inconsistency
 def check_timestamps(video_url, start_time, end_time):
@@ -77,9 +87,9 @@ def check_url(url):
         return False
     
 # downloading the video from youtube
-def download_video(video_url, final_video_name):
+def download_video(yt,final_video_name):
     
-    yt = YouTube(video_url, on_progress_callback=on_progress)
+    #yt = YouTube(video_url, on_progress_callback=on_progress)
 
     header(standard_header, True)
     print(CBLUE + f"> Downloading: {yt.title}" + CEND)
@@ -91,17 +101,30 @@ def download_video(video_url, final_video_name):
 def cut_video(video_local_url, start_time, end_time, final_file):
 
     print("- Cutting your video...")
-    
-    ffmpeg_url = imageio_ffmpeg.get_ffmpeg_exe()
     sp.call([ffmpeg_url, '-loglevel', 'quiet', '-ss', start_time, '-to', end_time, '-i', video_local_url, '-c', 'copy', f"{final_file}.mp4"])
 
-# downloading and cutting 
-def download_and_cut_video(video_url, video_name_after_cut, start_time, end_time):
+def cut_audio(yt,input_file, start_time, end_time, final_name):
+    #ffmpeg -i sample.avi -ss 00:03:05 -t 00:00:45.0 -q:a 0 -map a sample.mp3
+
+    download_video(yt,final_name) 
+    sp.call([ffmpeg_url, '-loglevel', 'quiet', '-ss', start_time, '-to', end_time, '-i', f"./{final_name}.mp4", '-q:a', '0', '-map', 'a', f"{final_name}_YTD-audio.mp3"])
+    cleaner(f"./{final_name}.mp4")
+
+def extract_audio(yt, final_name):
+    #ffmpeg -i sample.avi -q:a 0 -map a sample.mp3
+
+    download_video(yt,final_name) 
+    sp.call([ffmpeg_url, '-loglevel', 'quiet', '-i', f"./{final_name}.mp4", '-q:a', '0', '-map','a', f"{final_name}_YTD-audio.mp3"])
+    cleaner(f"./{final_name}.mp4")
     
-    download_video(video_url,"temp_video")
+
+# downloading and cutting 
+def download_and_cut_video(yt,video_url, video_name_after_cut, start_time, end_time):
+    
+    download_video(yt,"temp_video")
     cut_video(f"./temp_video.mp4", start_time, end_time, video_name_after_cut)
 
-    os.remove(f"./temp_video.mp4") if os.path.exists("./temp_video.mp4") else print("- File not found! ")
+    cleaner("./temp_video.mp4")
 
     print(f"> Location: {os.getcwd()}")
     input()
