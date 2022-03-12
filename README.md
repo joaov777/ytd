@@ -6,7 +6,6 @@
 
 - Download Youtube videos (Full length or sections)
 - Download Youtube audio track (Full length or sections)
-- Extract video and/or audio from local video files (Full length or sections)
 
 ## How does it work?
 
@@ -53,15 +52,16 @@ pip install -r requirements.txt
      - youtube.com/watch?v={random_url}
      - {random_url}
 2. Choose a menu option
-   - If no arguments are passed after the Youtube URL, the script will download the full length of the video.
+   - There are four options divided among audio and video. Both encompassing their full length or a section them.
 
-2. If you are cutting the video/audio, the time format used follows the logic `HH:MM:SS` (Hour, Minute, Second). For example:
+3. If you are cutting the video/audio, the time format used follows the logic `HH:MM:SS` (Hour, Minute, Second). For example:
 
    - 01:20:10 - At exactly 1 hour, 20 minutes and 10 seconds.
-
    - 00:01:30 - At exactly 1 minute and 30 seconds.
-
    - 00:00:15 - At exactly 15 seconds.
 
-## Tips
-- Some videos might take longer than others due to its length as well as your to your bandwidth
+## Do you want to help?
+- Contact me by e-mail at joaov777@gmail.com
+- Make sure you include your Github profile, point out past projects and contact information.
+
+
