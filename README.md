@@ -50,7 +50,6 @@ pip install -r requirements.txt
      - ht<area>tp://ww<area>w.youtube.com/watch?v={random_url}
      - w<area>ww.youtube.com/watch?v={random_url}
      - youtube.com/watch?v={random_url}
-     - {random_url}
 2. Choose a menu option
    - There are four options divided among audio and video. Both encompassing their full length or a section them.
 
