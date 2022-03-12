@@ -82,14 +82,11 @@ def check_url(url):
             return True
         except:
             return False
-
     else:
         return False
     
 # downloading the video from youtube
 def download_video(yt,final_video_name):
-    
-    #yt = YouTube(video_url, on_progress_callback=on_progress)
 
     header(standard_header, True)
     print(CBLUE + f"> Downloading: {yt.title}" + CEND)
@@ -104,20 +101,17 @@ def cut_video(video_local_url, start_time, end_time, final_file):
     sp.call([ffmpeg_url, '-loglevel', 'quiet', '-ss', start_time, '-to', end_time, '-i', video_local_url, '-c', 'copy', f"{final_file}.mp4"])
 
 def cut_audio(yt,input_file, start_time, end_time, final_name):
-    #ffmpeg -i sample.avi -ss 00:03:05 -t 00:00:45.0 -q:a 0 -map a sample.mp3
 
     download_video(yt,final_name) 
     sp.call([ffmpeg_url, '-loglevel', 'quiet', '-ss', start_time, '-to', end_time, '-i', f"./{final_name}.mp4", '-q:a', '0', '-map', 'a', f"{final_name}_YTD-audio.mp3"])
     cleaner(f"./{final_name}.mp4")
 
 def extract_audio(yt, final_name):
-    #ffmpeg -i sample.avi -q:a 0 -map a sample.mp3
 
     download_video(yt,final_name) 
     sp.call([ffmpeg_url, '-loglevel', 'quiet', '-i', f"./{final_name}.mp4", '-q:a', '0', '-map','a', f"{final_name}_YTD-audio.mp3"])
     cleaner(f"./{final_name}.mp4")
     
-
 # downloading and cutting 
 def download_and_cut_video(yt,video_url, video_name_after_cut, start_time, end_time):
     
