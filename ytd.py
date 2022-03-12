@@ -47,7 +47,7 @@ def main():
 
                     break
                 
-                ytdf.download_video(yt,url, file_name)
+                ytdf.download_video(yt,file_name)
 
             case "2":
 
