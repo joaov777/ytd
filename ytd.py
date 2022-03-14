@@ -48,6 +48,7 @@ def main():
                     break
                 
                 ytdf.download_video(yt,file_name)
+                ytdf.wrapping(f"{file_name}.mp4")
 
             case "2":
 
@@ -64,7 +65,8 @@ def main():
                     end = input("- End point (HH:MM:SS): ")
 
                     if ytdf.check_timestamps(url, start, end):
-                        ytdf.download_and_cut_video(yt,url, file_name, start, end)
+                        ytdf.cut_video(yt,start, end, file_name)
+                        ytdf.wrapping(f"{file_name}.mp4")
                         break
 
             case "3":
@@ -79,7 +81,8 @@ def main():
                     if file_name == "" : file_name = f"{yt.title}"
                     break
                 
-                ytdf.extract_audio(yt,file_name)
+                ytdf.download_audio(yt,file_name)
+                ytdf.wrapping(f"{file_name}.mp4")
 
             case "4":
 
@@ -96,7 +99,8 @@ def main():
                     end = input("- End point (HH:MM:SS): ")
 
                     if ytdf.check_timestamps(url, start, end):
-                        ytdf.cut_audio(yt,url,start, end, file_name)
+                        ytdf.cut_audio(yt,start, end, file_name)
+                        ytdf.wrapping(f"{file_name}.mp4")
                         break
         
             case ("q"|"quit"):

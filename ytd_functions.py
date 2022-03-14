@@ -9,7 +9,7 @@ import imageio_ffmpeg
 import subprocess as sp
 
 ffmpeg_url = imageio_ffmpeg.get_ffmpeg_exe()
-standard_header="### -- YOUTUBE VIDEO DOWNLOADER -- ###"
+standard_header="### -- YTD - YOUTUBE DOWNLOADER -- ###"
 
 #defining colors
 CBLUE = "\33[34m"
@@ -84,8 +84,18 @@ def check_url(url):
             return False
     else:
         return False
+
+# message after processing
+def wrapping(file_name):
     
-# downloading the video from youtube
+    if os.path.exists(file_name):
+        print(f"> SUCCESS!! - Location: {os.getcwd()}")
+    else: 
+        print(f"> FAILED!! - Location: {os.getcwd()}")
+    
+    input("> Press any key to continue...")
+
+# download full video stream
 def download_video(yt,final_video_name):
 
     header(standard_header, True)
@@ -94,29 +104,32 @@ def download_video(yt,final_video_name):
     video = yt.streams.get_highest_resolution()
     video.download(filename=f"{final_video_name}.mp4")
    
-# cutting the video by section
-def cut_video(video_local_url, start_time, end_time, final_file):
+# cutting video stream section
+def cut_video(yt, start_time, end_time, final_file):
+    
+    download_video(yt,f"{final_file}_YTD-video")
+    sp.call([ffmpeg_url, '-loglevel', 'quiet', '-ss', start_time, '-to', end_time, '-i', f"{final_file}_YTD-video.mp4" , '-c', 'copy', f"{final_file}.mp4" ])
+    cleaner(f"./{final_file}_YTD-video.mp4")
 
-    print("- Cutting your video...")
-    sp.call([ffmpeg_url, '-loglevel', 'quiet', '-ss', start_time, '-to', end_time, '-i', video_local_url, '-c', 'copy', f"{final_file}.mp4"])
+# cut audio stream section
+def cut_audio(yt,start_time, end_time, final_name):
 
-def cut_audio(yt,input_file, start_time, end_time, final_name):
+    download_video(yt,f"{final_name}_YTD-audio") 
+    sp.call([ffmpeg_url, '-loglevel', 'quiet', '-ss', start_time, '-to', end_time, '-i', f"{final_name}_YTD-audio.mp4", '-q:a', '0', '-map', 'a', f"{final_name}.mp3"])
+    cleaner(f"./{final_name}_YTD-audio.mp4")
 
-    download_video(yt,final_name) 
-    sp.call([ffmpeg_url, '-loglevel', 'quiet', '-ss', start_time, '-to', end_time, '-i', f"./{final_name}.mp4", '-q:a', '0', '-map', 'a', f"{final_name}_YTD-audio.mp3"])
-    cleaner(f"./{final_name}.mp4")
+# download full audio stream
+def download_audio(yt, final_name):
 
-def extract_audio(yt, final_name):
-
-    download_video(yt,final_name) 
-    sp.call([ffmpeg_url, '-loglevel', 'quiet', '-i', f"./{final_name}.mp4", '-q:a', '0', '-map','a', f"{final_name}_YTD-audio.mp3"])
-    cleaner(f"./{final_name}.mp4")
+    download_video(yt,f"{final_name}_YTD-audio") 
+    sp.call([ffmpeg_url, '-loglevel', 'quiet', '-i', f"{final_name}_YTD-audio.mp4", '-q:a', '0', '-map','a', f"{final_name}.mp3"])
+    cleaner(f"./{final_name}_YTD-audio.mp4")
     
 # downloading and cutting 
 def download_and_cut_video(yt,video_url, video_name_after_cut, start_time, end_time):
     
     download_video(yt,"temp_video")
-    cut_video(f"./temp_video.mp4", start_time, end_time, video_name_after_cut)
+    cut_video(yt,f"./temp_video.mp4", start_time, end_time, video_name_after_cut)
 
     cleaner("./temp_video.mp4")
 
