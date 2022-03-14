@@ -58,10 +58,10 @@ pip install -r requirements.txt
 2. If you are cutting the video/audio, the time format used follows the logic `HH:MM:SS` (Hour, Minute, Second). For example:
 
    - 01:20:10 - At exactly 1 hour, 20 minutes and 10 seconds.
-
    - 00:01:30 - At exactly 1 minute and 30 seconds.
-
    - 00:00:15 - At exactly 15 seconds.
 
 ## Tips
-- Some videos might take longer than others due to its length as well as your to your bandwidth
+- Some videos might take longer than others due to its length as well as your to your bandwidth.
+- Make sure you check the releases for more up to date and consistent packages. 
+- Executable file for Windows machines run regardless of any pre-existent software installation.
