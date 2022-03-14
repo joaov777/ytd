@@ -44,7 +44,7 @@ def main():
                     ytdf.header("> Download Full Video")
                     
                     file_name = input("- File output name: ")
-
+                    if file_name == "" : file_name = f"{yt.title}"
                     break
                 
                 ytdf.download_video(yt,file_name)
@@ -58,13 +58,14 @@ def main():
                     ytdf.header("> Download and Trim video")
                     
                     file_name = input("- File output name: ")
+                    if file_name == "" : file_name = f"{yt.title}"
 
                     start = input("- Start point (HH:MM:SS): ")
                     end = input("- End point (HH:MM:SS): ")
 
                     if ytdf.check_timestamps(url, start, end):
                         ytdf.download_and_cut_video(yt,url, file_name, start, end)
-                    break
+                        break
 
             case "3":
 
@@ -75,7 +76,7 @@ def main():
                     ytdf.header("> Download Full Audio")
                     
                     file_name = input("- File output name: ")
-
+                    if file_name == "" : file_name = f"{yt.title}"
                     break
                 
                 ytdf.extract_audio(yt,file_name)
@@ -89,13 +90,14 @@ def main():
                     ytdf.header("> Download and Trim audio")
                     
                     file_name = input("- File output name: ")
+                    if file_name == "" : file_name = f"{yt.title}"
 
                     start = input("- Start point (HH:MM:SS): ")
                     end = input("- End point (HH:MM:SS): ")
 
                     if ytdf.check_timestamps(url, start, end):
                         ytdf.cut_audio(yt,url,start, end, file_name)
-                    break
+                        break
         
             case ("q"|"quit"):
                 print("Exiting now...")

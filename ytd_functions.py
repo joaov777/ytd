@@ -33,7 +33,7 @@ def cleaner(file_name):
         return True
     else: 
         return False
-
+        
 # checking video timestamps both for pattern and inconsistency
 def check_timestamps(video_url, start_time, end_time):
     """- Check whether timestamps make sense for the pattern HH:MM:SS"""
@@ -120,8 +120,8 @@ def download_and_cut_video(yt,video_url, video_name_after_cut, start_time, end_t
 
     cleaner("./temp_video.mp4")
 
-    print(f"> Location: {os.getcwd()}")
-    input()
+    print(f"> SUCCESS!! - Location: {os.getcwd()}")
+    input("> Press any key to continue...")
  
 #converting time to seconds
 def time_to_sec(t):
