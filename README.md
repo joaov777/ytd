@@ -43,6 +43,7 @@ pip install -r requirements.txt
 ```
 
 ## How to use this script?
+### Interactive session
 
 1. Provide a valid Youtube URL
    - Youtube URL's are accepted: 
@@ -58,6 +59,22 @@ pip install -r requirements.txt
    - 01:20:10 - At exactly 1 hour, 20 minutes and 10 seconds.
    - 00:01:30 - At exactly 1 minute and 30 seconds.
    - 00:00:15 - At exactly 15 seconds.
+
+### CLI parameters (Explicit arguments)
+CLI parameters can also be used. This is fundamentally important when the commmand must be performed through automated routines. Available options:
+- --url/-u - Provide Valid Youtube URL 
+- --video/-v - Video stream
+- --audio/-a - Audio stream
+- --start/-s - Start point 
+- --end/-e - End point 
+- --output/-o - Output file name (without extension)
+
+Examples:
+```bash
+python ytd.py --url https://www.youtube.com/watch?v=f02mOEt11OQ --audio --start 00:00:10 --end 00:00:40 --output "Final file"
+python ytd.py -u https://www.youtube.com/watch?v=f02mOEt11OQ --video --s 00:05:30 --end 00:10:50 -o "Middle Part"
+```
+The options can be shuffled without any problem. 
 
 ## Tips
 - Some videos might take longer than others due to its length as well as your to your bandwidth.
