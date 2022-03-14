@@ -11,47 +11,30 @@ import argparse
 import sys
 
 
-def check_arguments():
+# function to check cli options
+def manage_cli():
 
-    
-    
     parser = argparse.ArgumentParser()
-    subparser = parser.add_subparsers(dest='')
 
     group = parser.add_mutually_exclusive_group()
 
     parser.add_argument('--url','-u', type=str, help='Valid Youtube video URL', required=True)
-
     group.add_argument('--audio','-a', help='Audio stream', action='store_true', default='void')
     group.add_argument('--video','-v', help='Video stream', action='store_true', default='void')
-    parser.add_argument('--start','-s', type=str, help='Start point for trimming', default='void')
-    parser.add_argument('--end','-e', type=str, help='End point for trimming', default='void')
-    parser.add_argument('--output','-o', type=str, help='Output file name', default='standard')
+    parser.add_argument('--start','-s', type=str, help='Start point for trimming', required=True)
+    parser.add_argument('--end','-e', type=str, help='End point for trimming', required=True)
+    parser.add_argument('--output','-o', type=str, help='Output file name', required=True)
 
     args = parser.parse_args()
 
     yt = YouTube(args.url,on_progress_callback=on_progress)
-
-    if args.video == "void":
-        if args.start == "void":
-            ytdf.download_audio(yt,args.output)
-        else:
-            ytdf.cut_audio(yt,args.start, args.end, args.output)
-    else:
-        if args.start == "void":
-            ytdf.download_video(yt,args.output)
-        else:
-            ytdf.cut_video(yt, args.start, args.end, args.output)
-
     
+    if args.video == "void":
+        ytdf.cut_audio(yt,args.start, args.end, args.output)
+    else:
+        ytdf.cut_video(yt, args.start, args.end, args.output)
 
-def check_args():
-    if not len(sys.argv) > 1:
-        main()
-    else: 
-        check_arguments()
-
-#main thread
+# main thread
 def main():
 
     file_name = ""
@@ -157,4 +140,7 @@ def main():
             break
 
 if __name__ == "__main__":
-   check_args()
+    if not len(sys.argv) > 1:
+        main()
+    else: 
+        manage_cli()
