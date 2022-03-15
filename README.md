@@ -11,7 +11,7 @@
 
 The main script is `ytd.py`. It saves the final file (video or audio) through interactive or cli explicit parameters (context below on how to use this script). the final video or audio file is saved **on the current valid relative path where the script was executed**. The videos are saved in an "*.mp4*" container whereas audio files are saved as "*.mp3*". Future updates will provide options for more customization. If the full video (or a section of it) is downloaded, the highest video and audio quality available are automatically chosen.
 
-The intended target (valid Youtube URL) seamlessly generates a valid final file downloaded locally on your machine so that only then operations can be done on it (trimming/cutting). A temporary file named "*temp_video.mp4*" is created on the current directory while the script is eecuted. This file is deleted at the end of its usage and script execution.
+The intended target (valid Youtube URL) seamlessly generates a valid final file downloaded locally on your machine so that only then operations can be done on it (trimming/cutting). A temporary file named "*temp_video.mp4*" is created on the current directory while the script is executed. This file is deleted at the end of its usage and script execution.
 
 If no output file name is provided, the file will be named after the valid Youtube videl URL provided.
 
