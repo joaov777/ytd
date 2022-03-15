@@ -9,11 +9,11 @@
 
 ## How does it work?
 
-When you run the script `ytd.py`, it saves the final file (depending on your menu choice) **on the current valid path from where the script was executed**. The videos are saved in an "*.mp4*" container whereas audio files are saved as "*.mp3*". Future updates will provide options for more customization. If the full video (or a section of it) is downloaded, the highest video and audio quality available are automatically chosen.
+The main script is `ytd.py`. It saves the final file (video or audio) through interactive or cli explicit parameters (context below on how to use this script). the final video or audio file is saved **on the current valid relative path where the script was executed**. The videos are saved in an "*.mp4*" container whereas audio files are saved as "*.mp3*". Future updates will provide options for more customization. If the full video (or a section of it) is downloaded, the highest video and audio quality available are automatically chosen.
 
-The logic of the procedures within this project makes sure the intended target (valid Youtube URL) seamlessly generates a valid final file downloaded locally on your machine so that only then operations can be done on it. This way, reinforcing the full separation between the download routine from any further necessary processing in order to generate the final file. 
+The intended target (valid Youtube URL) seamlessly generates a valid final file downloaded locally on your machine so that only then operations can be done on it (trimming/cutting). A temporary file named "*temp_video.mp4*" is created on the current directory while the script is eecuted. This file is deleted at the end of its usage and script execution.
 
-The script temporarily saves a file named "*temp_video.mp4*" on the path from where the script is executed. Such file temporarily serves the application to perform further operations such as cutting and/or extracting audio/video. 
+If no output file name is provided, the file will be named after the valid Youtube videl URL provided.
 
 ## Requirements
 
@@ -62,12 +62,12 @@ pip install -r requirements.txt
 
 ### CLI parameters (Explicit arguments)
 CLI parameters can also be used. This is fundamentally important when the commmand must be performed through automated routines. Available options:
-- --url/-u - Provide Valid Youtube URL 
-- --video/-v - Video stream
-- --audio/-a - Audio stream
-- --start/-s - Start point 
-- --end/-e - End point 
-- --output/-o - Output file name (without extension)
+- `--url/-u` - Provide Valid Youtube URL (required)
+- `--video/-v` - Video stream (required)
+- `--audio/-a` - Audio stream (required)
+- `--start/-s` - Start point (required)
+- `--end/-e` - End point (required)
+- `--output/-o` - Output file name (without extension) (required)
 
 Examples:
 ```bash
@@ -82,6 +82,3 @@ The options can be shuffled without any problem.
 - Executable file for Windows machines run regardless of any pre-existent software installation.
 ## Do you want to help?
 - Contact me by e-mail at joaov777@gmail.com
-- Make sure you include your Github profile, point out past projects and contact information.
-
-
