@@ -42,6 +42,12 @@ python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
+- You can also run it via Docker
+```bash
+# run this command from within the cloned repo locally
+docker run -it --rm --name ytdcontainer -v $(pwd)/:/ytd/  -w /ytd python:3.10.0 bash -c "pip install -r /ytd/requirements.txt && python /ytd/ytd.py"
+```
+
 ## How to use this script?
 ### Interactive session
 
