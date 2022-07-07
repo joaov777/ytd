@@ -25,7 +25,7 @@ proglog==0.1.9
 pycparser==2.21
 pyinstaller==4.9
 pyinstaller-hooks-contrib==2022.2
-pytube==12.0.0
+pytube==12.1.0
 pywin32-ctypes==0.2.0
 requests==2.27.1
 six==1.16.0
