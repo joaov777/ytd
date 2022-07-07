@@ -44,8 +44,11 @@ pip install -r requirements.txt
 
 - You can also run it via Docker
 ```bash
-# run this command from within the cloned repo locally
+# run this command from within the cloned repo locally (interactive script example)
 docker run -it --rm --name ytdcontainer -v $(pwd)/:/ytd/  -w /ytd python:3.10.0 bash -c "pip install -r /ytd/requirements.txt && python /ytd/ytd.py"
+
+# automated one liner example
+docker run -it --rm --name ytdcontainer -v $(pwd)/:/ytd/  -w /ytd python:3.10.0 bash -c "pip install -r /ytd/requirements.txt && python /ytd/ytd.py --audio --url https://www.youtube.com/watch?v=An28cZyGZQI --start 00:00:20 --end 00:00:30 --output final"
 ```
 
 ## How to use this script?
