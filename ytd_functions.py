@@ -1,5 +1,4 @@
 # REQUIRED LIBRARIES
-from fileinput import filename
 from pytube import YouTube
 import os
 import time as t

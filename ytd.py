@@ -1,7 +1,6 @@
 #/usr/bin/env python
 
 #importing functions
-from turtle import clear
 import ytd_functions as ytdf
 from datetime import datetime
 import time as t
